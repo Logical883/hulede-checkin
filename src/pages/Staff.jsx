@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getAllStudents, verifyStudent, unverifyStudent } from '../lib/api'
+import { getAttendanceSummary, verifyStudent, unverifyStudent } from '../lib/api'
 
 export default function Staff() {
   const [students, setStudents]   = useState([])
@@ -12,16 +12,16 @@ export default function Staff() {
 
   async function load() {
     setLoading(true)
-    const { data } = await getAllStudents()
+    const { data } = await getAttendanceSummary()
     setStudents(data)
     setLoading(false)
   }
 
   useEffect(() => { load() }, [])
 
-  // Auto-refresh every 3 seconds
+  // Auto-refresh every 15 minutes
   useEffect(() => {
-    const t = setInterval(load, 3000)
+    const t = setInterval(load, 900000)
     return () => clearInterval(t)
   }, [])
 
@@ -48,7 +48,7 @@ export default function Staff() {
 
   const filtered = students.filter(s =>
     s.full_name.toLowerCase().includes(search.toLowerCase()) ||
-    s.hfknust_id.toLowerCase().includes(search.toLowerCase()) ||
+    (s.hfknust_id || '').toLowerCase().includes(search.toLowerCase()) ||
     (s.student_id || '').includes(search)
   )
 
