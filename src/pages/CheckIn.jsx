@@ -29,6 +29,7 @@ export default function CheckIn() {
   const [error, setError]     = useState('')
   const [loading, setLoading] = useState(false)
   const [checkin, setCheckin] = useState(null)
+  const [countdown, setCountdown] = useState(null)
 
   async function handleLookup() {
     if (!hfId.trim()) { setError('Please enter your HFKNUST ID.'); return }
@@ -67,6 +68,17 @@ export default function CheckIn() {
     setCheckin(data)
     setStep(3)
     setLoading(false)
+    setCountdown(5)
+    const interval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(interval)
+          setStep(1); setHfId(''); setStudent(null); setCheckin(null); setError(''); setCountdown(null)
+          return null
+        }
+        return prev - 1
+      })
+    }, 1000)
   }
 
   function formatTime(ts) {
@@ -198,6 +210,7 @@ export default function CheckIn() {
               </div>
 
               <p className="text-muted text-xs">Your attendance is recorded. Thank you for attending!</p>
+      {countdown && <p className="text-muted text-xs mt-sm" style={{color:'var(--hf-amber)'}}>Returning to home screen in {countdown}s...</p>}
             </div>
           )}
         </div>
