@@ -200,6 +200,7 @@ body {
   font-size: 15px; outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
   -webkit-appearance: none;
+  appearance: none;
 }
 .field input:focus, .field select:focus {
   border-color: var(--green-dark);
