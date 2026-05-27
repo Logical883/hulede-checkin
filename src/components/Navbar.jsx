@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { toggleTheme, getTheme } from '../lib/theme'
+import logoUrl from '../assets/logo.svg'
 
 const IconSun = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -18,14 +19,29 @@ const IconMoon = () => (
 
 export default function Navbar({ title, subtitle, right }) {
   const [dark, setDark] = useState(getTheme() === 'dark')
+
   function handleToggle() {
     const next = toggleTheme()
     setDark(next === 'dark')
   }
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <div className="navbar-logo">HF</div>
+        {/* Logo image */}
+        <img
+          src={logoUrl}
+          alt="Hulede Foundation"
+          style={{
+            width: 36,
+            height: 36,
+            objectFit: 'contain',
+            borderRadius: 6,
+            background: '#fff',
+            padding: 2,
+            flexShrink: 0,
+          }}
+        />
         <div>
           <div className="navbar-title">{title}</div>
           {subtitle && <div className="navbar-sub">{subtitle}</div>}
