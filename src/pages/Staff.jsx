@@ -19,9 +19,9 @@ export default function Staff() {
 
   useEffect(() => { load() }, [])
 
-  // Auto-refresh every 15 seconds
+  // Auto-refresh every 3 seconds
   useEffect(() => {
-    const t = setInterval(load, 15000)
+    const t = setInterval(load, 3000)
     return () => clearInterval(t)
   }, [])
 
