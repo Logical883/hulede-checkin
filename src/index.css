@@ -342,6 +342,25 @@ tbody td { padding: 11px 16px; color: var(--text); vertical-align: middle; }
 }
 .search-wrap input { padding-left: 40px; }
 
+/* Standalone search input (no wrapper class needed) */
+input[type="text"][placeholder*="Search"] {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  width: 100%;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+input[type="text"][placeholder*="Search"]:focus {
+  border-color: var(--green-dark);
+  box-shadow: 0 0 0 3px rgba(0,104,48,0.10);
+}
+
 /* ── Progress Bar ─────────────────────────────── */
 .progress-bar {
   height: 8px; background: var(--surface2);

@@ -131,7 +131,7 @@ function ExcelUploadPanel({ onSuccess }) {
       {/* Create new event */}
       <div style={{ marginBottom: '1.1rem' }}>
         <button className="btn btn-outline btn-sm" onClick={() => setShowCreate(!showCreate)}>
-          {showCreate ? <IconX /> : '+'} {showCreate ? 'Cancel' : 'Create New Event Year'}
+          {showCreate ? <><IconX /> Cancel</> : 'New Event Year'}
         </button>
         {showCreate && (
           <div style={{ marginTop: '1rem', padding: '1rem', background: 'var(--surface2)', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
@@ -219,7 +219,7 @@ function ExcelUploadPanel({ onSuccess }) {
       )}
 
       <button className="btn btn-primary btn-block" onClick={handleUpload} disabled={uploading || !file || !eventId}>
-        {uploading ? <><div className="spinner" /> Uploading...</> : <><IconUpload /> Upload to Supabase</>}
+        {uploading ? <><div className="spinner" /> Uploading...</> : <><IconUpload /> Upload Student List</>}
       </button>
     </div>
   )
@@ -364,7 +364,7 @@ export default function Admin() {
 
           {/* Tabs */}
           <div className="row mb-md gap-sm">
-            {[['attendance','Attendance'], ['upload','Upload List']].map(([t, label]) => (
+            {[['attendance', 'Attendance'], ['upload', 'Upload List']].map(([t, label]) => (
               <button key={t} className={`btn btn-sm ${tab === t ? 'btn-primary' : 'btn-outline'}`} onClick={() => setTab(t)}>
                 {label}
               </button>
@@ -375,13 +375,16 @@ export default function Admin() {
 
           {tab === 'attendance' && (
             <>
-              <div className="search-wrap mb-md">
-                <span className="search-icon"><IconSearch /></span>
+              <div style={{ position: 'relative', marginBottom: '1rem' }}>
+                <div style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
+                  <IconSearch />
+                </div>
                 <input
                   type="text"
                   placeholder="Search by name, HFKNUST ID or student number..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
+                  style={{ paddingLeft: 40 }}
                 />
               </div>
 
